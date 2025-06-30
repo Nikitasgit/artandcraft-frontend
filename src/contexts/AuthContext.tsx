@@ -18,9 +18,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       });
       if (response.data.data) {
         setUser(response.data.data);
+      } else {
+        setUser(null);
       }
     } catch {
-      console.log("User not authenticated");
+      setUser(null);
     } finally {
       setLoading(false);
     }
@@ -48,7 +50,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
       if (response.data.data) {
         setUser(response.data.data);
-        localStorage.setItem("isLoggedIn", "true");
         return true;
       }
       return false;
@@ -79,7 +80,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
       if (response.data.data) {
         setUser(response.data.data);
-        localStorage.setItem("isLoggedIn", "true");
         return true;
       }
       return false;
@@ -108,7 +108,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         }
       );
       setUser(null);
-      localStorage.removeItem("isLoggedIn");
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{ message: string }>;
       const errorMessage =

@@ -1,0 +1,18 @@
+.furniture-card-stats {
+  padding: 1.5rem;
+  background-color: var(--background-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+.furniture-card-stats h4 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.chart-container {
+  height: 200px;
+
+  margin-bottom: 1rem;
+}
