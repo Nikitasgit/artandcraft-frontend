@@ -1,15 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import "./Navbar.css";
 
 function Navbar() {
-  const { user, loading } = useAuth();
+  const { user, loading, logout } = useAuth();
+  const navigate = useNavigate();
 
   if (loading) {
     return <div className="navbar-loading">Loading...</div>;
   }
 
   const isLoggedIn = !!user;
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <nav className="navbar">
@@ -28,7 +38,9 @@ function Navbar() {
             </li>
             {isLoggedIn ? (
               <li>
-                <Link to="/logout">Logout</Link>
+                <button onClick={handleLogout} className="logout-button">
+                  Logout
+                </button>
               </li>
             ) : (
               <>

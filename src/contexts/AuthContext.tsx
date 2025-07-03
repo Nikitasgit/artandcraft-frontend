@@ -73,16 +73,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setError(null);
 
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/auth/register`,
-        credentials
-      );
-
-      if (response.data.data) {
-        setUser(response.data.data);
-        return true;
-      }
-      return false;
+      await axios.post(`${API_BASE_URL}/auth/register`, credentials);
+      return true;
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{ message: string }>;
       const errorMessage =

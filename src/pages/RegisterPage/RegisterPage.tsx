@@ -11,16 +11,19 @@ function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    e.stopPropagation();
     clearError();
 
     if (!email.trim() || !password.trim()) {
       return;
     }
 
-    const success = await register({ email, password });
-    if (success) {
-      navigate("/login");
+    try {
+      const success = await register({ email, password });
+      if (success) {
+        navigate("/login");
+      }
+    } catch (err) {
+      console.error("Unexpected error during registration:", err);
     }
   };
 
@@ -66,7 +69,7 @@ function RegisterPage() {
                   <li>12 caractères</li>
                   <li>Une lettre majuscule</li>
                   <li>Un chiffre</li>
-                  <li>Un caractère spécial (!@#$%^&*(),.?":{}|&lt;&gt;)</li>
+                  <li>Un caractère spécial</li>
                 </ul>
               </small>
             </div>

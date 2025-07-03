@@ -63,7 +63,6 @@ function FurnitureCard({ furniture, onDelete }: FurnitureCardProps) {
         }
       );
 
-      // Call the parent's onDelete callback to refresh the list
       if (onDelete) {
         onDelete(furniture._id);
       }
